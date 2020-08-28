@@ -1,6 +1,3 @@
-input.onGesture(Gesture.TiltRight, function () {
-    Infiloo.change(LedSpriteProperty.X, 1)
-})
 radio.onReceivedNumber(function (receivedNumber) {
     Infiloo = game.createSprite(0, 4)
 })
@@ -10,9 +7,6 @@ input.onButtonPressed(Button.A, function () {
         Infiloo.delete()
     }
 })
-input.onGesture(Gesture.TiltLeft, function () {
-    Infiloo.change(LedSpriteProperty.X, -1)
-})
 input.onButtonPressed(Button.B, function () {
     if (!(Infiloo.isDeleted())) {
         radio.sendNumber(1)
@@ -21,6 +15,111 @@ input.onButtonPressed(Button.B, function () {
 })
 let CAR: game.LedSprite = null
 let Infiloo: game.LedSprite = null
+basic.showLeds(`
+    # . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    `)
+basic.showLeds(`
+    # # . . .
+    # . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    `)
+basic.showLeds(`
+    # # # . .
+    # # . . .
+    # . . . .
+    . . . . .
+    . . . . .
+    `)
+basic.showLeds(`
+    # # # . .
+    # # . . .
+    # . . . .
+    . . . . .
+    . . . . .
+    `)
+basic.showLeds(`
+    # # # # .
+    # # # . .
+    # # . . .
+    # . . . .
+    . . . . .
+    `)
+basic.showLeds(`
+    . # # # #
+    # # # # .
+    # # # . .
+    # # . . .
+    # . . . .
+    `)
+basic.showLeds(`
+    . . # # #
+    . # # # #
+    # # # # .
+    # # # . .
+    # # . . .
+    `)
+basic.showLeds(`
+    . . . # #
+    . . # # #
+    . # # # #
+    # # # # .
+    # # # . .
+    `)
+basic.showLeds(`
+    . . . . #
+    . . . # #
+    . . # # #
+    . # # # #
+    # # # # .
+    `)
+basic.showLeds(`
+    . . . . #
+    . . . # #
+    . . # # #
+    . # # # #
+    # # # # #
+    `)
+basic.showLeds(`
+    . . . . .
+    . . . . #
+    . . . # #
+    . . # # #
+    . # # # #
+    `)
+basic.showLeds(`
+    . . . . .
+    . . . . .
+    . . . . #
+    . . . # #
+    . . # # #
+    `)
+basic.showLeds(`
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . #
+    . . . # #
+    `)
+basic.showLeds(`
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . #
+    `)
+basic.showLeds(`
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    . . . . .
+    `)
 radio.setGroup(123)
 Infiloo = game.createSprite(0, 4)
 if (control.deviceName() != "gotag") {
@@ -29,7 +128,7 @@ if (control.deviceName() != "gotag") {
 basic.forever(function () {
     CAR = game.createSprite(randint(0, 4), 0)
     for (let index = 0; index < 5; index++) {
-        basic.pause(1000)
+        basic.pause(200)
         CAR.change(LedSpriteProperty.Y, 1)
         if (!(Infiloo.isDeleted())) {
             if (Infiloo.isTouching(CAR)) {
