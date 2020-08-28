@@ -1,15 +1,15 @@
 radio.onReceivedNumber(function (receivedNumber) {
-    Infiloo = game.createSprite(0, 4)
+    Infiloo = game.createSprite(receivedNumber, 4)
 })
 input.onButtonPressed(Button.A, function () {
     if (!(Infiloo.isDeleted())) {
-        radio.sendNumber(1)
+        radio.sendNumber(Infiloo.get(LedSpriteProperty.X))
         Infiloo.delete()
     }
 })
 input.onButtonPressed(Button.B, function () {
     if (!(Infiloo.isDeleted())) {
-        radio.sendNumber(1)
+        radio.sendNumber(Infiloo.get(LedSpriteProperty.X))
         Infiloo.delete()
     }
 })
@@ -37,13 +37,6 @@ basic.showLeds(`
     . . . . .
     `)
 basic.showLeds(`
-    # # # . .
-    # # . . .
-    # . . . .
-    . . . . .
-    . . . . .
-    `)
-basic.showLeds(`
     # # # # .
     # # # . .
     # # . . .
@@ -58,67 +51,60 @@ basic.showLeds(`
     # . . . .
     `)
 basic.showLeds(`
-    . . # # #
+    . # # # #
     . # # # #
     # # # # .
     # # # . .
     # # . . .
     `)
 basic.showLeds(`
-    . . . # #
-    . . # # #
+    . # . # #
+    . # # # #
     . # # # #
     # # # # .
     # # # . .
     `)
 basic.showLeds(`
-    . . . . #
-    . . . # #
-    . . # # #
+    . # . . #
+    . # . # #
+    . # # # #
     . # # # #
     # # # # .
     `)
 basic.showLeds(`
-    . . . . #
-    . . . # #
-    . . # # #
+    . # . . .
+    . # . . #
+    . # . # #
     . # # # #
-    # # # # #
-    `)
-basic.showLeds(`
-    . . . . .
-    . . . . #
-    . . . # #
-    . . # # #
     . # # # #
     `)
 basic.showLeds(`
-    . . . . .
-    . . . . .
-    . . . . #
-    . . . # #
-    . . # # #
+    . # . . .
+    . # . . .
+    . # . . #
+    . # . # #
+    . # # # #
     `)
 basic.showLeds(`
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . #
-    . . . # #
+    . # . . .
+    . # . . .
+    . # . . .
+    . # . . #
+    . # # # #
     `)
 basic.showLeds(`
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . #
+    . # . . .
+    . # . . .
+    . # . . .
+    . # . . .
+    . # # # #
     `)
 basic.showLeds(`
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
-    . . . . .
+    . # . . .
+    . # . . .
+    . # . . .
+    . # . . .
+    . # # # #
     `)
 radio.setGroup(123)
 Infiloo = game.createSprite(0, 4)
@@ -129,10 +115,35 @@ basic.forever(function () {
     CAR = game.createSprite(randint(0, 4), 0)
     for (let index = 0; index < 5; index++) {
         basic.pause(200)
+        if (input.rotation(Rotation.Roll) < -5) {
+            Infiloo.change(LedSpriteProperty.X, -1)
+        } else if (input.rotation(Rotation.Roll) > 5) {
+            Infiloo.change(LedSpriteProperty.X, 1)
+        }
         CAR.change(LedSpriteProperty.Y, 1)
         if (!(Infiloo.isDeleted())) {
             if (Infiloo.isTouching(CAR)) {
-                basic.showString("CRASH!!!")
+                basic.showLeds(`
+                    # . . . #
+                    . # . # .
+                    . . # . .
+                    . # . # .
+                    # . . . #
+                    `)
+                basic.showLeds(`
+                    # . . . #
+                    . . . . .
+                    . . # . .
+                    . . . . .
+                    # . . . #
+                    `)
+                basic.showLeds(`
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    `)
             }
         }
     }
